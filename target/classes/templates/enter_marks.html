@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Marks - Admin</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="role-admin">
+    <header>
+        Academic Records
+        <div style="display: flex; gap: 10px;">
+            <a th:href="@{/export/all_marks}" class="logout-header-btn" style="background: #27ae60; color: white;">
+                <i class="fa-solid fa-file-pdf"></i> Download PDF Report
+            </a>
+            <a th:href="@{/admin_dashboard}" class="logout-header-btn">
+                <i class="fa-solid fa-arrow-left"></i> Dashboard
+            </a>
+        </div>
+    </header>
+
+    <div class="container" style="max-width: 800px;">
+        <div class="content-card">
+            <h2 style="color: var(--primary-red); margin-top: 0; border-bottom: 2px solid var(--text-blue); padding-bottom: 10px;">Enter Student Marks</h2>
+            <p style="font-size: 14px; color: #666; margin-bottom: 20px;">Select a student and course to record academic performance.</p>
+
+            <form th:action="@{/EnterMarksServlet}" method="POST">
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold;">Select Student</label>
+                    <select name="studentEmail" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                        <option value="">-- Choose Student --</option>
+                        <option th:each="student : ${students}" th:value="${student.email}" th:text="${student.name} + ' (' + ${student.email} + ')'">Banu Rekha (banurekha@veltech.edu.in)</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold;">Select Course</label>
+                    <select name="subjectName" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                        <option value="">-- Choose Course --</option>
+                        <option value="Software Engineering">Software Engineering</option>
+                        <option value="Machine Learning">Machine Learning</option>
+                        <option value="Cloud Computing">Cloud Computing</option>
+                        <option value="Cyber Security">Cyber Security</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold;">Marks Obtained (0-100)</label>
+                    <input type="number" name="marks" min="0" max="100" placeholder="Enter numerical marks" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                </div>
+
+                <button type="submit" class="login-btn">UPDATE RECORDS</button>
+            </form>
+
+        </div>
+    </div>
+</body>
+</html>

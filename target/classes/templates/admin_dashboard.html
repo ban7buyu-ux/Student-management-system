@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - SMS</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        Administrator Portal
+        <a th:href="@{/LogoutServlet}" class="logout-header-btn">
+            <i class="fa-solid fa-power-off"></i> Logout
+        </a>
+    </header>
+
+    <div class="container">
+        <!-- Admin Welcome Stats -->
+        <div class="analytics-grid">
+            <div class="stat-card">
+                <div style="font-size: 14px; color: #777; font-weight: 800; text-transform: uppercase; margin-bottom:15px;">Total Students</div>
+                <div style="font-size: 32px; font-weight: 900; color: #A8282D; margin-bottom: 20px;" th:text="${studentCount}">0</div>
+            </div>
+            <div class="stat-card">
+                <div style="font-size: 14px; color: #777; font-weight: 800; text-transform: uppercase; margin-bottom:15px;">Active Courses</div>
+                <div style="font-size: 32px; font-weight: 900; color: #0b3c5d; margin-bottom: 20px;" th:text="${courseCount}">0</div>
+            </div>
+            <div class="stat-card">
+                <div style="font-size: 14px; color: #777; font-weight: 800; text-transform: uppercase; margin-bottom:15px;">Feedback Recieved</div>
+                <div style="font-size: 32px; font-weight: 900; color: #27ae60; margin-bottom: 20px;" th:text="${feedbackCount}">0</div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <a th:href="@{/add_student}" class="dash-card">
+                <div class="card-icon"><i class="fa-solid fa-user-plus"></i></div>
+                <div class="card-text">Add New Student</div>
+            </a>
+            <a th:href="@{/view_students}" class="dash-card">
+                <div class="card-icon"><i class="fa-solid fa-users-viewfinder"></i></div>
+                <div class="card-text">View All Students</div>
+            </a>
+            <a th:href="@{/manage_courses}" class="dash-card">
+                <div class="card-icon"><i class="fa-solid fa-list-check"></i></div>
+                <div class="card-text">Manage Courses</div>
+            </a>
+            <a th:href="@{/enter_marks}" class="dash-card">
+                <div class="card-icon"><i class="fa-solid fa-file-pen"></i></div>
+                <div class="card-text">Enter Marks/Grades</div>
+            </a>
+            <a th:href="@{/view_feedback}" class="dash-card">
+                <div class="card-icon"><i class="fa-solid fa-comments"></i></div>
+                <div class="card-text">View Feedback</div>
+            </a>
+            <a th:href="@{/manage_noticeboard}" class="dash-card">
+                <div class="card-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                <div class="card-text">Notice Board</div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

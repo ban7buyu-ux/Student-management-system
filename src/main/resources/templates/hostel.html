@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Info - SMS</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        My Hostel Allotment Info
+        <a th:href="@{/dashboard}" class="logout-header-btn">
+            <i class="fa-solid fa-arrow-left"></i> Dashboard
+        </a>
+    </header>
+
+    <div class="container">
+        <div class="content-card">
+            <h2 style="color: var(--primary-red); margin-top: 0; border-bottom: 2px solid var(--text-blue); padding-bottom: 10px;">Accommodation Details</h2>
+            
+            <div th:if="${hostel != null}">
+                <table>
+                    <tr><th style="font-weight: bold;">Block Name:</th><td th:text="${hostel.block_name}">Block A</td></tr>
+                    <tr><th style="font-weight: bold;">Room Number:</th><td th:text="${hostel.room_number}">101</td></tr>
+                    <tr><th style="font-weight: bold;">Allotment Status:</th><td th:text="${hostel.status}" style="color: green; font-weight: bold;">Allotted</td></tr>
+                </table>
+            </div>
+
+            <div th:if="${hostel == null}" style="text-align: center; padding: 40px 20px;">
+                <i class="fa-solid fa-bed" style="font-size: 48px; color: #ddd; margin-bottom: 20px;"></i>
+                <p style="color: #666; font-size: 18px;">You do not have a hostel allotment yet.</p>
+                <a th:href="@{/hostel_booking}" class="logout-header-btn" style="display: inline-block; margin-top: 20px;">Book Now</a>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

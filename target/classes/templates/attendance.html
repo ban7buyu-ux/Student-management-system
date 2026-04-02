@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance - SMS</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        My Attendance Report
+        <a th:href="@{/dashboard}" class="logout-header-btn">
+            <i class="fa-solid fa-arrow-left"></i> Dashboard
+        </a>
+    </header>
+
+    <div class="container">
+        <div class="content-card">
+            <h2 style="color: var(--primary-red); margin-top: 0; border-bottom: 2px solid var(--text-blue); padding-bottom: 10px;">Academic Attendance</h2>
+            
+            <table>
+                <tr>
+                    <th style="font-weight: bold;">Subject</th>
+                    <th style="font-weight: bold;">Percentage</th>
+                    <th style="font-weight: bold;">Status</th>
+                </tr>
+                <tr th:each="record : ${attendance}">
+                    <td th:text="${record.subject_name}">Software Engineering</td>
+                    <td th:text="${record.percentage} + '%'">87%</td>
+                    <td th:text="${record.status}" th:style="'color: ' + (${record.status} == 'Safe' ? 'green' : 'orange')">Safe</td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(attendance)}">
+                    <td colspan="3" style="text-align: center; color: #999;">No attendance records found.</td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</body>
+</html>

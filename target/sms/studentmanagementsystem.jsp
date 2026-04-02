@@ -1,0 +1,58 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Student Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #f7f9fc; font-family: 'Inter', sans-serif; margin: 0; }
+        .login-container { max-width: 450px; margin: 80px auto; padding: 0 20px; text-align: center; }
+        .login-form { margin-top: 50px; }
+        .login-form input { width: 100%; padding: 14px 15px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; box-sizing: border-box; }
+        .login-links { text-align: center; margin-top: 15px; margin-bottom: 30px; }
+        .login-links a, .login-links div { display: block; color: #666; font-size: 14px; text-decoration: none; margin-bottom: 8px; font-weight: 500; }
+        .login-links i { margin-right: 5px; color: #0b3c5d; }
+        .login-btn { background-color: #4a7c97 !important; color: white !important; padding: 14px; border: none; border-radius: 6px; font-weight: 700; font-size: 16px; width: 100%; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- SMS stylized logo matching screenshot -->
+        <div style="margin-bottom: 60px;">
+            <h1 style="font-size: 42px; line-height: 1.1; margin: 0; font-family: 'Inter', sans-serif; font-weight: 900; letter-spacing: -1px;">
+                <span style="color: #A8282D; display: block; margin-bottom: 5px;">Student</span>
+                <span style="color: #0b3c5d;">Management System</span>
+            </h1>
+        </div>
+        
+        <div class="login-form">
+            <%
+                String errorMsg = (String) request.getAttribute("errorMessage");
+                if (errorMsg != null) {
+            %>
+                <div class="error" style="text-align: center; margin-bottom: 15px;"><%= errorMsg %></div>
+            <%
+                }
+            %>
+
+            <form action="LoginServlet" method="post">
+                <input type="text" name="email" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                
+                <div class="login-links">
+                    <div><i class="fa-solid fa-arrow-right-to-bracket"></i> Portal Guidelines</div>
+                    <div><i class="fa-solid fa-arrow-right-to-bracket"></i> Know Your Login ID</div>
+                    <a href="admin_login.jsp" style="font-weight: 800; color: #0b3c5d;">
+                        <i class="fa-solid fa-user-circle"></i> Admin Login
+                    </a>
+                </div>
+
+                <button type="submit" class="login-btn">LOGIN NOW</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

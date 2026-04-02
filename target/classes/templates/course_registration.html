@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - SMS</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        Student Course Registration
+        <a th:href="@{/dashboard}" class="logout-header-btn">
+            <i class="fa-solid fa-arrow-left"></i> Dashboard
+        </a>
+    </header>
+
+    <div class="container">
+        <div class="content-card">
+            <h2 style="color: var(--primary-red); margin-top: 0; border-bottom: 2px solid var(--text-blue); padding-bottom: 10px;">Available Courses</h2>
+            
+            <!-- Messages -->
+            <div th:if="${session.successMessage}" style="background: #e8f5e9; color: #2e7d32; padding: 10px; border-radius: 5px; margin: 10px 0; font-weight: bold;">
+                <span th:text="${session.successMessage}"></span>
+            </div>
+            <div th:if="${session.errorMessage}" style="background: #ffebee; color: #c62828; padding: 10px; border-radius: 5px; margin: 10px 0; font-weight: bold;">
+                <span th:text="${session.errorMessage}"></span>
+            </div>
+
+            <form th:action="@{/CourseRegistrationServlet}" method="POST" style="margin-top: 20px;">
+                <table>
+                    <tr>
+                        <th style="font-weight: bold;">Select</th>
+                        <th style="font-weight: bold;">Code</th>
+                        <th style="font-weight: bold;">Subject Name</th>
+                        <th style="font-weight: bold;">Credits</th>
+                    </tr>
+                    <tr th:each="course : ${courses}">
+                        <td style="text-align: center;">
+                            <input type="checkbox" name="courseIds" th:value="${course.id}">
+                        </td>
+                        <td th:text="${course.course_code}">CS101</td>
+                        <td th:text="${course.course_name}">Software Engineering</td>
+                        <td th:text="${course.credits}">3</td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(courses)}">
+                        <td colspan="4" style="text-align: center; color: #999;">No courses available for registration.</td>
+                    </tr>
+                </table>
+                
+                <div style="margin-top: 25px;">
+                    <button type="submit" class="login-btn">Submit Registration</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Registered Courses Section -->
+        <div class="content-card" style="margin-top: 30px;">
+            <h2 style="color: var(--accent-blue); margin-top: 0; border-bottom: 2px solid var(--primary-red); padding-bottom: 10px;">Your Registered Courses</h2>
+            
+            <table>
+                <tr>
+                    <th style="font-weight: bold;">Code</th>
+                    <th style="font-weight: bold;">Subject Name</th>
+                    <th style="font-weight: bold;">Credits</th>
+                    <th style="font-weight: bold;">Action</th>
+                </tr>
+                <tr th:each="reg : ${registeredCourses}">
+                    <td th:text="${reg.course_code}">CS101</td>
+                    <td th:text="${reg.course_name}">Software Engineering</td>
+                    <td th:text="${reg.credits}">3</td>
+                    <td>
+                        <form th:action="@{/RemoveRegistrationServlet}" method="POST" style="margin: 0; padding: 0;">
+                            <input type="hidden" name="courseId" th:value="${reg.id}">
+                            <button type="submit" style="background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                                <i class="fa-solid fa-trash"></i> Remove
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(registeredCourses)}">
+                    <td colspan="3" style="text-align: center; color: #999;">You haven't registered for any courses yet.</td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</body>
+</html>

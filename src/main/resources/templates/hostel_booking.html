@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Booking - SMS</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        Hostel Room Booking
+        <a th:href="@{/dashboard}" class="logout-header-btn">
+            <i class="fa-solid fa-arrow-left"></i> Dashboard
+        </a>
+    </header>
+
+    <div class="container">
+        <div class="content-card">
+            <h2 style="color: var(--primary-red); margin-top: 0; border-bottom: 2px solid var(--text-blue); padding-bottom: 10px;">Available Rooms</h2>
+            
+            <form th:action="@{/HostelBookingServlet}" method="POST" style="margin-top: 20px;">
+                <div style="margin-bottom: 20px;">
+                    <label for="roomId" style="display: block; margin-bottom: 10px; font-weight: bold; color: #555;">Select your preferred room:</label>
+                    <select id="roomId" name="roomId" style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #ddd; font-size: 16px;">
+                        <option value="" disabled selected>-- Choose a room --</option>
+                        <option th:each="room : ${rooms}" th:value="${room.id}" th:text="${room.block_name} + ' - Room ' + ${room.room_number}">Block A - Room 101</option>
+                    </select>
+                </div>
+                <button type="submit" class="login-btn">Submit Booking Request</button>
+            </form>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - SMS</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        My Profile Detail
+        <a th:href="@{/dashboard}" class="logout-header-btn">
+            <i class="fa-solid fa-arrow-left"></i> Dashboard
+        </a>
+    </header>
+
+    <div class="container">
+        <div class="content-card">
+            <h2 style="color: var(--primary-red); margin-top: 0; border-bottom: 2px solid var(--text-blue); padding-bottom: 10px;">Student Information</h2>
+            
+            <table>
+                <tr><th style="font-weight: bold;">Name:</th><td th:text="${profile.name}">K. Banu Rekha</td></tr>
+                <tr><th style="font-weight: bold;">Email:</th><td th:text="${profile.email}">banurekha@veltech.edu.in</td></tr>
+                <tr><th style="font-weight: bold;">Department:</th><td th:text="${profile.department}">Computer Science</td></tr>
+                <tr><th style="font-weight: bold;">Year:</th><td th:text="${profile.year}">Senior / 4th Year</td></tr>
+                <tr><th style="font-weight: bold;">Phone Number:</th><td th:text="${profile.phone}">+91 9876543210</td></tr>
+            </table>
+
+        </div>
+    </div>
+</body>
+</html>

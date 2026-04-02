@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Courses - Admin</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        Manage Curriculum
+        <a th:href="@{/admin_dashboard}" class="logout-header-btn">
+            <i class="fa-solid fa-arrow-left"></i> Admin Home
+        </a>
+    </header>
+
+    <div class="container">
+        <div class="content-card">
+            <h2 style="color: var(--primary-red); margin-top: 0; border-bottom: 2px solid var(--text-blue); padding-bottom: 10px;">Add New Course</h2>
+            
+            <form th:action="@{/AddCourseServlet}" method="POST" style="margin-top: 20px;">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Course Code (e.g. CS101):</label>
+                    <input type="text" name="course_code" class="login-input" style="width: 100%;" required>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Course Name:</label>
+                    <input type="text" name="course_name" class="login-input" style="width: 100%;" required>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Credits:</label>
+                    <input type="number" name="credits" class="login-input" style="width: 100%;" required>
+                </div>
+                <button type="submit" class="login-btn">Add New Course</button>
+            </form>
+        </div>
+
+        <div class="content-card" style="margin-top: 25px;">
+            <h2 style="color: var(--primary-red); margin-top: 0; border-bottom: 2px solid var(--text-blue); padding-bottom: 10px;">Existing Courses</h2>
+            
+            <table>
+                <tr>
+                    <th style="font-weight: bold;">Code</th>
+                    <th style="font-weight: bold;">Name</th>
+                    <th style="font-weight: bold;">Credits</th>
+                </tr>
+                <tr th:each="course : ${courses}">
+                    <td th:text="${course.course_code}">CS101</td>
+                    <td th:text="${course.course_name}">Software Engineering</td>
+                    <td th:text="${course.credits}">3</td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(courses)}">
+                    <td colspan="3" style="text-align: center; color: #999;">No courses found in database.</td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</body>
+</html>

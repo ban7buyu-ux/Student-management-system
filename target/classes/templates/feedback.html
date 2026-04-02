@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - SMS</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        Submit Student Feedback
+        <a th:href="@{/dashboard}" class="logout-header-btn">
+            <i class="fa-solid fa-arrow-left"></i> Dashboard
+        </a>
+    </header>
+
+    <div class="container">
+        <div class="content-card">
+            <h2 style="color: var(--primary-red); margin-top: 0; border-bottom: 2px solid var(--text-blue); padding-bottom: 10px;">General Feedback</h2>
+            
+            <form th:action="@{/FeedbackServlet}" method="POST" style="margin-top: 20px;">
+                <div style="margin-bottom: 20px;">
+                    <label for="message" style="display: block; margin-bottom: 10px; font-weight: bold; color: #555;">How can we improve your experience?</label>
+                    <textarea id="message" name="message" rows="6" class="login-input" style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #ddd; font-family: inherit; font-size: 16px;" placeholder="Enter your detailed feedback here..." required></textarea>
+                </div>
+                <button type="submit" class="login-btn">Submit Feedback</button>
+            </form>
+
+        </div>
+    </div>
+</body>
+</html>

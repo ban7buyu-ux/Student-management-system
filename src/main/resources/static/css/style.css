@@ -1,0 +1,263 @@
+/* Modern UI ERP Style - Simple Glassmorphism */
+
+:root {
+    --primary-red: #A8282D;
+    --text-blue: #0b3c5d;
+    --accent-blue: #407593;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --background-gradient: #f7f9fc;
+    --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    --border-radius: 15px;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background: var(--background-gradient);
+    background-attachment: fixed;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+header {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--text-blue);
+    width: 100%;
+    padding: 15px 30px;
+    font-size: 22px;
+    font-weight: 800;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logout-header-btn {
+    font-size: 13px;
+    font-weight: 600;
+    background: white;
+    color: var(--primary-red);
+    text-decoration: none;
+    border: 1px solid rgba(168, 40, 45, 0.3);
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logout-header-btn:hover {
+    background: var(--primary-red);
+    color: white;
+    transform: scale(1.05);
+}
+
+.container {
+    padding: 30px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Glassmorphism Cards */
+.dash-card, .content-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+}
+
+.dash-card {
+    padding: 25px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.dash-card:hover {
+    background: rgba(255, 255, 255, 0.85);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.15);
+}
+
+.card-icon {
+    background: #A8282D;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.card-text {
+    color: #0b3c5d;
+    font-size: 18px;
+    font-weight: 800;
+    text-align: left;
+}
+
+.content-card, .card {
+    padding: 35px;
+    margin-bottom: 25px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+/* Performance Tracker Visuals */
+.analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 10px;
+    background: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-blue), var(--text-blue));
+    border-radius: 5px;
+    transition: width 0.5s ease;
+}
+
+/* Table Enhancements */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    margin-top: 15px;
+}
+
+th {
+    padding: 15px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent-blue);
+    font-weight: 800;
+}
+
+td {
+    padding: 15px;
+    background: white;
+    border: none;
+}
+
+tr td:first-child { border-radius: 10px 0 0 10px; }
+tr td:last-child { border-radius: 0 10px 10px 0; }
+
+/* Toast Notification */
+.toast {
+    background: #5d7c5d;
+    color: white;
+    padding: 30px 40px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.toast-icon {
+    font-size: 24px;
+    margin-right: 20px;
+}
+
+.toast-body h4 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.toast-body p {
+    margin: 5px 0 0 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.toast-close {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    cursor: pointer;
+    font-size: 20px;
+    opacity: 0.8;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 14px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #555;
+    box-sizing: border-box;
+    background: white;
+}
+
+.login-btn {
+    background-color: #4a7c97 !important;
+    color: white !important;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s ease;
+}
+
+.login-btn:hover {
+    background-color: #3b6379 !important;
+}
+
+@media (max-width: 600px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - SMS</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        Student Dashboard
+        <a th:href="@{/LogoutServlet}" class="logout-header-btn">
+            <i class="fa-solid fa-power-off"></i> Logout
+        </a>
+    </header>
+
+    <div class="container">
+        <!-- Toast Notification (Image 3) -->
+        <div th:if="${session.successMessage}" class="toast">
+            <div class="toast-icon">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <div class="toast-body">
+                <h4>Success!</h4>
+                <p th:text="${session.successMessage}"></p>
+            </div>
+            <div class="toast-close" onclick="this.parentElement.style.display='none'">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+
+        <!-- Academic Progress Overview (Image 3) -->
+        <div class="analytics-grid">
+            <div class="stat-card">
+                <div style="font-size: 14px; color: #777; font-weight: 800; text-transform: uppercase; margin-bottom:15px;">Attendance</div>
+                <div style="font-size: 32px; font-weight: 900; color: #A8282D; margin-bottom: 20px;" th:text="${totalAttendance} + '%'">86%</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" th:style="'width: ' + ${totalAttendance} + '%'"></div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div style="font-size: 14px; color: #777; font-weight: 800; text-transform: uppercase; margin-bottom:15px;">Academic Progress</div>
+                <div style="font-size: 32px; font-weight: 900; color: #0b3c5d; margin-bottom: 20px;">
+                    <span th:text="${creditsTotal}">18</span> <span style="font-size: 16px; font-weight: 600; color: #999;">/ 120 Cr</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" th:style="'width: ' + (${creditsTotal} / 120.0 * 100) + '%'"></div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div style="font-size: 14px; color: #777; font-weight: 800; text-transform: uppercase; margin-bottom:15px;">Current GPA</div>
+                <div style="font-size: 32px; font-weight: 900; color: #27ae60; margin-bottom: 10px;" th:text="${gpa}">3.56</div>
+                <div style="font-size: 12px; color: #bbb; font-weight: 600;">Updated: Today</div>
+            </div>
+        </div>
+        
+        <!-- Announcements Section -->
+        <div class="content-card" style="margin-top: 30px; margin-bottom: 30px;">
+            <h2 style="color: var(--primary-red); margin-top: 0; border-bottom: 2px solid var(--text-blue); padding-bottom: 10px;">
+                <i class="fa-solid fa-bullhorn"></i> Campus Announcements
+            </h2>
+            
+            <div th:each="notice : ${notices}" style="padding: 15px; border-bottom: 1px solid #eee;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                    <h4 th:text="${notice.title}" style="margin: 0; color: #0b3c5d; font-weight: 700;">Notice Title</h4>
+                    <span th:text="${#dates.format(notice.post_date, 'dd MMM yyyy')}" style="font-size: 11px; color: #999; font-weight: 600;">Date</span>
+                </div>
+                <p th:text="${notice.message}" style="margin: 0; font-size: 14px; color: #555; line-height: 1.5;">Message content goes here...</p>
+            </div>
+            
+            <div th:if="${#lists.isEmpty(notices)}" style="padding: 30px; text-align: center; color: #999;">
+                <i class="fa-regular fa-bell-slash" style="font-size: 30px; margin-bottom: 10px;"></i>
+                <p>No new announcements at this time.</p>
+            </div>
+        </div>
+
+        <!-- Dashboard Action Grid (Image 4) -->
+        <div class="dashboard-grid">
+            <a th:href="@{/profile}" class="dash-card">
+                <div class="card-icon"><i class="fa-solid fa-address-card"></i></div>
+                <div class="card-text">Profile Detail</div>
+            </a>
+            <a th:href="@{/attendance}" class="dash-card">
+                <div class="card-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                <div class="card-text">Attendance Report</div>
+            </a>
+            <a th:href="@{/results}" class="dash-card">
+                <div class="card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <div class="card-text">Results & Marks</div>
+            </a>
+            <a th:href="@{/feedback}" class="dash-card">
+                <div class="card-icon"><i class="fa-solid fa-comments"></i></div>
+                <div class="card-text">Submit Feedback</div>
+            </a>
+            <a th:href="@{/course_registration}" class="dash-card">
+                <div class="card-icon"><i class="fa-solid fa-book-open"></i></div>
+                <div class="card-text">Course Registration</div>
+            </a>
+            <a th:href="@{/hostel_booking}" class="dash-card">
+                <div class="card-icon"><i class="fa-solid fa-bed"></i></div>
+                <div class="card-text">Hostel Booking</div>
+            </a>
+            <a th:href="@{/hostel}" class="dash-card">
+                <div class="card-icon"><i class="fa-solid fa-house"></i></div>
+                <div class="card-text">Hostel Info</div>
+            </a>
+            <a th:href="@{/LogoutServlet}" class="dash-card">
+                <div class="card-icon"><i class="fa-solid fa-power-off"></i></div>
+                <div class="card-text">Logout</div>
+            </a>
+        </div>
+    </div>
+    </div>
+    <script>
+    // Auto-close success toast after 5 seconds
+    window.onload = function() {
+        const toast = document.querySelector('.toast');
+        if (toast) {
+            setTimeout(() => {
+                toast.style.transition = "opacity 0.5s ease";
+                toast.style.opacity = "0";
+                setTimeout(() => {
+                    toast.style.display = "none";
+                }, 500);
+            }, 5000);
+        }
+    };
+    </script>
+</body>
+</html>

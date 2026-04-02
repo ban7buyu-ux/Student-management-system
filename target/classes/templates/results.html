@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results - SMS</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        Academic Results & Marks
+        <div style="display: flex; gap: 10px;">
+            <a th:href="@{/export/results}" class="logout-header-btn" style="background: #27ae60; color: white;">
+                <i class="fa-solid fa-file-pdf"></i> Download PDF Report
+            </a>
+            <a th:href="@{/dashboard}" class="logout-header-btn">
+                <i class="fa-solid fa-arrow-left"></i> Dashboard
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content-card">
+            <h2 style="color: var(--primary-red); margin-top: 0; border-bottom: 2px solid var(--text-blue); padding-bottom: 10px;">Semester Performance</h2>
+            
+            <table>
+                <tr>
+                    <th style="font-weight: bold;">Subject</th>
+                    <th style="font-weight: bold;">Marks</th>
+                    <th style="font-weight: bold;">Grade</th>
+                </tr>
+                <tr th:each="result : ${results}">
+                    <td th:text="${result.subject_name}">Software Engineering</td>
+                    <td th:text="${result.marks}">95</td>
+                    <td th:text="${result.grade}" th:style="'color: ' + (${result.grade} == 'F' ? 'red' : 'green')">A+</td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(results)}">
+                    <td colspan="3" style="text-align: center; color: #999;">No results published yet.</td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</body>
+</html>
